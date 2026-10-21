@@ -1,5 +1,4 @@
 ## Hi there 👋🏻 
-<meta name="google-site-verification" content="Ut45NrGnjR9YmbzX7JRPZqKXcwYhTHDeSdBoRsA8aSE" />
 <!--
 **shmashantv-ai/Shmashantv-ai** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
