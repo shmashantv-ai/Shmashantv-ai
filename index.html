@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080910">
+  <title>SHMASHAN TV AI — Creator Studio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #080910;
+      color: #f5f5fa;
+    }
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #282938;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand { font-size: 20px; font-weight: 800; }
+    .brand span { color: #a78bfa; }
+    .tag { color: #aaaac0; font-size: 12px; }
+    main { max-width: 760px; margin: auto; padding: 28px 18px; }
+    .hero { text-align: center; padding: 25px 0; }
+    .hero h1 { font-size: 32px; margin: 8px 0; }
+    .hero h1 span { color: #a78bfa; }
+    .hero p { color: #b5b5c8; line-height: 1.6; }
+    .panel {
+      background: #12131f;
+      border: 1px solid #303044;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    label { display: block; margin: 15px 0 8px; font-weight: bold; }
+    select, textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #3b3b52;
+      background: #090a12;
+      color: white;
+      font-size: 15px;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .primary {
+      width: 100%;
+      margin-top: 16px;
+      color: white;
+      background: linear-gradient(100deg, #7547e8, #b044c4);
+    }
+    .secondary { background: #26263a; color: white; }
+    #result {
+      white-space: pre-wrap;
+      line-height: 1.65;
+      color: #e0dafa;
+      overflow-wrap: anywhere;
+    }
+    .note { color: #a8a8bd; font-size: 12px; line-height: 1.6; }
+    footer { text-align: center; padding: 25px; color: #88889e; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand">SHMASHAN TV <span>AI</span></div>
+      <div class="tag">YOUR CREATIVE UNIVERSE</div>
+    </div>
+    <div class="tag">BETA v0.1</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="tag">✦ AI CREATOR STUDIO ✦</div>
+      <h1>Create something <span>extraordinary.</span></h1>
+      <p>Stories, image prompts, video prompts aur voiceover scripts — sab ek jagah se shuru karo.</p>
+    </section>
+
+    <section class="panel">
+      <h2>✦ Creator Workspace</h2>
+      <label for="tool">Kya create karna hai?</label>
+      <select id="tool">
+        <option value="story">Story ko scenes mein badlo</option>
+        <option value="image">AI image prompt</option>
+        <option value="video">Image-to-video prompt</option>
+        <option value="voice">Hindi voiceover script</option>
+      </select>
+
+      <label for="idea">Apna idea likho</label>
+      <textarea id="idea" placeholder="Example: Ek truck driver ko aadhi raat jungle mein ek rahasyamayi aurat dikhti hai..."></textarea>
+
+      <button class="primary" onclick="createPrompt()">Generate Creative Draft ✨</button>
+
+      <div id="output" hidden>
+        <label>Your creative draft</label>
+        <div class="panel" id="result"></div>
+        <button class="secondary" onclick="copyResult()">Copy Draft</button>
+      </div>
+      <p class="note">Beta version: yeh starter tool aapke idea se text draft banata hai. Abhi real AI image, video ya audio generate nahi karta.</p>
+    </section>
+  </main>
+
+  <footer>SHMASHAN TV AI · Built for creators</footer>
+
+  <script>
+    function createPrompt() {
+      const idea = document.getElementById("idea").value.trim();
+      const tool = document.getElementById("tool").value;
+      if (!idea) {
+        alert("Pehle apna idea likho.");
+        return;
+      }
+
+      const templates = {
+        story: "Create a structured story with a strong hook, clear scene-by-scene progression, suspense, original characters, and a satisfying ending.\n\nIdea: " + idea,
+        image: "Create a detailed cinematic image prompt for this idea. Specify subject, environment, lighting, composition, camera angle, colour palette, and consistent art style. Avoid unwanted text and watermarks.\n\nIdea: " + idea,
+        video: "Create a production-ready image-to-video prompt. Specify subject motion, background motion, camera movement, timing, continuity, lighting, and elements that must remain consistent. Avoid flicker and distorted anatomy.\n\nIdea: " + idea,
+        voice: "Write a natural Hindi voiceover script with an engaging opening, conversational narration, pauses, emotional delivery directions, and a strong ending.\n\nIdea: " + idea
+      };
+
+      document.getElementById("result").textContent = templates[tool];
+      document.getElementById("output").hidden = false;
+    }
+
+    async function copyResult() {
+      const text = document.getElementById("result").textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert("Draft copied!");
+      } catch (e) {
+        alert("Text select karke manually copy kar lo.");
+      }
+    }
+  </script>
+</body>
+  </html>
+      
